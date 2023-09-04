@@ -18,14 +18,11 @@ public sealed class WebCamSelector : MonoBehaviour
 
     #region UI callbacks
 
-    async void SelectDevice(string name)
+    void SelectDevice(string name)
     {
         if (_webcam != null) Destroy(_webcam);
-
         _webcam = new WebCamTexture(name);
         _webcam.Play();
-
-        while (_webcam.width < 32) await Awaitable.NextFrameAsync();
     }
 
     #endregion
@@ -37,20 +34,24 @@ public sealed class WebCamSelector : MonoBehaviour
         await Application.RequestUserAuthorization(UserAuthorization.WebCam);
 
         var doc = GetComponent<UIDocument>();
-        var selector = (DropdownField)doc.rootVisualElement.Q("Selector");
-
-        var c_devs = WebCamTexture.devices.Select(dev => dev.name);
-        var d_devs = WebCamTexture.devices.Select(dev => dev.depthCameraName);
-        selector.choices = c_devs.Concat(d_devs.Where(s => s != null)).ToList();
-        selector.RegisterValueChangedCallback(e => SelectDevice(e.newValue));
+        var list = (DropdownField)doc.rootVisualElement.Q("Selector");
+        list.choices = WebCamTexture.devices.Select(dev => dev.name).ToList();
+        list.RegisterValueChangedCallback(e => SelectDevice(e.newValue));
     }
 
     void Update()
     {
-        if (_webcam == null) return;
-        var vflip = _webcam.videoVerticallyMirrored;
-        var scale = new Vector2(1, vflip ? -1 : 1);
-        var offset = new Vector2(0, vflip ? 1 : 0);
+        if (_webcam == null || _webcam.width < 32) return;
+
+        var aspect1 = (float)_webcam.width / _webcam.height;
+        var aspect2 = (float)Destination.width / Destination.height;
+
+        var scale = new Vector2(aspect2 / aspect1, aspect1 / aspect2);
+        scale = Vector2.Min(Vector2.one, scale);
+        if (_webcam.videoVerticallyMirrored) scale.y *= -1;
+
+        var offset = (Vector2.one - scale) / 2;
+
         Graphics.Blit(_webcam, Destination, scale, offset);
     }
 
