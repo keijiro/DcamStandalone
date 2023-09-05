@@ -7,6 +7,7 @@ public sealed class Configurator : MonoBehaviour
     [SerializeField] string[] _prompts = null;
     [SerializeField] Color _titleColor = Color.white;
     [SerializeField] Color _overlayColor = Color.white;
+    [SerializeField] float _lifetime = 60 * 60;
 
     #endregion
 
@@ -63,16 +64,12 @@ public sealed class Configurator : MonoBehaviour
 
     Shuffler _target;
 
-    void Start()
+    async void Start()
     {
         _target = FindFirstObjectByType<Shuffler>();
-        SetPromptByIndex(0);
-        SetPrefilter(0);
-        InsertionLength(0);
-        SetStrengthAndStepCount(0);
-        SetTitleOpacity(0);
-        SetOverlayOpacity(0);
-        SetAudioLevel(0);
+
+        await Awaitable.WaitForSecondsAsync(_lifetime);
+        Application.Quit(1);
     }
 
     #endregion

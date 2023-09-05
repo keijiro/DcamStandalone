@@ -184,7 +184,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771488618}
-  - component: {fileID: 771488620}
   - component: {fileID: 771488619}
   m_Layer: 0
   m_Name: Configurator
@@ -192,7 +191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &771488618
 Transform:
   m_ObjectHideFlags: 0
@@ -229,19 +228,7 @@ MonoBehaviour:
   - Detailed surreal ukiyoe by Hiroshige
   _titleColor: {r: 1, g: 1, b: 1, a: 0.50980395}
   _overlayColor: {r: 1, g: 0, b: 0, a: 0.6666667}
---- !u!114 &771488620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 771488617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d38f682c99084d1eb7652f6faa5482f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _frameRate: 24
+  _lifetime: 3600
 --- !u!1 &1012035139
 GameObject:
   m_ObjectHideFlags: 0
