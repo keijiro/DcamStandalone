@@ -4,69 +4,82 @@ public sealed class Configurator : MonoBehaviour
 {
     #region Editable fields
 
-    [SerializeField] string[] _prompts = null;
-    [SerializeField] Color _titleColor = Color.white;
-    [SerializeField] Color _overlayColor = Color.white;
     [SerializeField] float _lifetime = 60 * 60;
+    [SerializeField] string[] _prompts = null;
+    [SerializeField] Color _overlayColor = Color.white;
 
     #endregion
 
-    #region Public accessors for input handlers
+    #region Private fields
 
-    public void SetPromptByIndex(int index)
-      => _target.Prompt = _prompts[index];
-
-    public void SetPrefilter(int index)
-      => _target.Prefilter = index;
-
-    public void InsertionLength(float param)
-      => _target.InsertionCount = (int)(param * 5 + 1);
-
-    public void SetStrengthAndStepCount(float param)
-    {
-        _target.Strength = 0.3f + param * 0.4f;
-        _target.StepCount = (int)(12 - param * 4);
-    }
-
-    public void SetTitleOpacity(float opacity)
-    {
-        var color = _titleColor;
-        color.a *= opacity;
-        _target.TitleColor = color;
-    }
-
-    public void SetOverlayOpacity(float opacity)
-    {
-        var color = _overlayColor;
-        color.a *= opacity;
-        _target.OverlayColor = color;
-    }
-
-    public float AudioSensitivity { get; set; }
+    Shuffler _target;
 
     #endregion
 
-    #region Audio input to noise level
+    #region Randomizers
 
-    float _audioLevel;
-
-    public float AudioLevel { get => _audioLevel; set => SetAudioLevel(value); }
-
-    void SetAudioLevel(float level)
+    async void RandomizePromptAsync()
     {
-        _audioLevel = level;
-        _target.NoiseLevel = level * AudioSensitivity;
+        while (true)
+        {
+            await Awaitable.WaitForSecondsAsync(Random.Range(10, 30));
+            _target.Prompt = _prompts[Random.Range(0, _prompts.Length)];
+        }
+    }
+
+    async void RandomizePrefilter()
+    {
+        while (true)
+        {
+            await Awaitable.WaitForSecondsAsync(Random.Range(10, 30));
+            _target.Prefilter = Mathf.Max(0, Random.Range(-2, 4));
+        }
+    }
+
+    async void RandomizeNoiseLevel()
+    {
+        while (true)
+        {
+            await Awaitable.NextFrameAsync();
+            var n = Klak.Math.Noise.Fractal(Time.time * 0.4f, 3, 3245);
+            _target.NoiseLevel = Mathf.Clamp01(n * 0.7f + 0.3f);
+        }
+    }
+
+    async void RandomizeCameraMotion()
+    {
+        var target = FindFirstObjectByType<CameraController>();
+        while (true)
+        {
+            await Awaitable.WaitForSecondsAsync(Random.Range(10, 30));
+            target.Strength = Mathf.Clamp01(Random.value * 1.5f);
+        }
+    }
+
+    async void RandomizeOverlay()
+    {
+        while (true)
+        {
+            await Awaitable.WaitForSecondsAsync(Random.Range(10, 30));
+            var color = _overlayColor;
+            color.a *= Mathf.Clamp01(Random.Range(-3.0f, 1.0f));
+            _target.OverlayColor = color;
+        }
     }
 
     #endregion
 
     #region MonoBehaviour implementation
 
-    Shuffler _target;
-
     async void Start()
     {
         _target = FindFirstObjectByType<Shuffler>();
+
+        RandomizePromptAsync();
+        RandomizePrefilter();
+        RandomizeNoiseLevel();
+        RandomizeCameraMotion();
+        RandomizeOverlay();
 
         await Awaitable.WaitForSecondsAsync(_lifetime);
         Application.Quit(1);

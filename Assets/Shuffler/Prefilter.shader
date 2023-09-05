@@ -182,20 +182,6 @@ float4 FragmentFlow(float4 pos : SV_Position, float2 uv : TEXCOORD0) : SV_Target
         {
             CGPROGRAM
             #pragma vertex Vertex
-            #pragma fragment FragmentVerticalSplit
-            ENDCG
-        }
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex Vertex
-            #pragma fragment FragmentHorizontalSplit
-            ENDCG
-        }
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex Vertex
             #pragma fragment FragmentSlice
             ENDCG
         }
@@ -204,6 +190,20 @@ float4 FragmentFlow(float4 pos : SV_Position, float2 uv : TEXCOORD0) : SV_Target
             CGPROGRAM
             #pragma vertex Vertex
             #pragma fragment FragmentFlow
+            ENDCG
+        }
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex Vertex
+            #pragma fragment FragmentVerticalSplit
+            ENDCG
+        }
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex Vertex
+            #pragma fragment FragmentHorizontalSplit
             ENDCG
         }
     }

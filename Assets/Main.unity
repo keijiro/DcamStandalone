@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2506a9b5dc56c42be83645442e883e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifetime: 3600
   _prompts:
   - Detailed surreal masterpiece illustration of an exploding human in a rococo style
     room with detailed walls by J. C. Leyendecker
@@ -226,9 +227,7 @@ MonoBehaviour:
   - Detailed surreal masterpiece painting of a medieval room by Winslow Homer
   - Detailed surreal masterpiece sketch of a devil in the hell by Arthur Rackham
   - Detailed surreal ukiyoe by Hiroshige
-  _titleColor: {r: 1, g: 1, b: 1, a: 0.50980395}
   _overlayColor: {r: 1, g: 0, b: 0, a: 0.6666667}
-  _lifetime: 3600
 --- !u!1 &1012035139
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,8 +600,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prompt: highly detailed surrealistic painting by J. C. Leyendecker
-  _strength: 0.45
-  _stepCount: 10
+  _strength: 0.7
+  _stepCount: 8
   _guidance: 12
   _prefilterNumber: 0
   _titleTexture: {fileID: 2800000, guid: 5a25b6e176fc44274b27c7d5d6417586, type: 3}
