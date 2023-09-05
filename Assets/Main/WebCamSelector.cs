@@ -10,7 +10,7 @@ public sealed class WebCamSelector : MonoBehaviour
 
     #endregion
 
-    #region Private objects
+    #region Private fields
 
     WebCamTexture _webcam;
 
@@ -21,8 +21,11 @@ public sealed class WebCamSelector : MonoBehaviour
     void SelectDevice(string name)
     {
         if (_webcam != null) Destroy(_webcam);
+
         _webcam = new WebCamTexture(name);
         _webcam.Play();
+
+        PlayerPrefs.SetString("WebcamDeviceName", name);
     }
 
     #endregion
@@ -34,9 +37,21 @@ public sealed class WebCamSelector : MonoBehaviour
         await Application.RequestUserAuthorization(UserAuthorization.WebCam);
 
         var doc = GetComponent<UIDocument>();
+        var root = doc.rootVisualElement.Q("Root");
         var list = (DropdownField)doc.rootVisualElement.Q("Selector");
+
+        list.visible = false;
+
+        root.AddManipulator(new Clickable(e => list.visible = !list.visible));
         list.choices = WebCamTexture.devices.Select(dev => dev.name).ToList();
         list.RegisterValueChangedCallback(e => SelectDevice(e.newValue));
+
+        var prev = PlayerPrefs.GetString("WebcamDeviceName");
+        if (!string.IsNullOrEmpty(prev))
+        {
+            var index = list.choices.FindIndex(x => x == prev);
+            if (index >= 0) list.index = index;
+        }
     }
 
     void Update()
