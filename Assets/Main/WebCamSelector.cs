@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Linq;
+using Cursor = UnityEngine.Cursor;
 
 public sealed class WebCamSelector : MonoBehaviour
 {
@@ -40,9 +41,9 @@ public sealed class WebCamSelector : MonoBehaviour
         var root = doc.rootVisualElement.Q("Root");
         var list = (DropdownField)doc.rootVisualElement.Q("Selector");
 
-        list.visible = false;
+        Cursor.visible = list.visible = false;
 
-        root.AddManipulator(new Clickable(e => list.visible = !list.visible));
+        root.AddManipulator(new Clickable(e => Cursor.visible = list.visible = !list.visible));
         list.choices = WebCamTexture.devices.Select(dev => dev.name).ToList();
         list.RegisterValueChangedCallback(e => SelectDevice(e.newValue));
 
