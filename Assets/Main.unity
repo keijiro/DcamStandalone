@@ -227,7 +227,7 @@ MonoBehaviour:
   - Detailed surreal masterpiece painting of a medieval room by Winslow Homer
   - Detailed surreal masterpiece sketch of a devil in the hell by Arthur Rackham
   - Detailed surreal ukiyoe by Hiroshige
-  _overlayColor: {r: 1, g: 0, b: 0, a: 0.6666667}
+  _overlayColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1012035139
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,14 +600,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prompt: highly detailed surrealistic painting by J. C. Leyendecker
-  _strength: 0.7
-  _stepCount: 8
+  _strength: 0.55
+  _stepCount: 9
   _guidance: 12
   _prefilterNumber: 0
   _titleTexture: {fileID: 2800000, guid: 5a25b6e176fc44274b27c7d5d6417586, type: 3}
   _titleColor: {r: 1, g: 1, b: 1, a: 0}
-  _overlayTexture: {fileID: 2800000, guid: 1d6072991e8994250a6bdcacfcbf3be8, type: 3}
-  _overlayColor: {r: 1, g: 0, b: 0, a: 0}
+  _overlayTexture: {fileID: 2800000, guid: 66d1ad67308d141899c01942f5fb63b4, type: 3}
+  _overlayColor: {r: 1, g: 1, b: 1, a: 1}
   _lutTexture: {fileID: 8534537815417165676, guid: 244beb38c4aca46d38429ea743939884, type: 3}
   _flipDuration: 0.16
   _queueLength: 11
