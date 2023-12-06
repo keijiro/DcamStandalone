@@ -42,7 +42,7 @@ public sealed class Configurator : MonoBehaviour
         {
             await Awaitable.NextFrameAsync();
             var n = Klak.Math.Noise.Fractal(Time.time * 0.8f, 3, 3245);
-            _target.NoiseLevel = Mathf.Clamp01(n * 0.5f);
+            _target.NoiseLevel = Mathf.Clamp01(n * 0.5f + 0.25f);
         }
     }
 
