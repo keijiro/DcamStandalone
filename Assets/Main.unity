@@ -226,7 +226,7 @@ MonoBehaviour:
   - Detailed surreal masterpiece painting of a medieval room by Winslow Homer
   - Detailed surreal masterpiece sketch of a devil in the hell by Arthur Rackham
   - Detailed surreal ukiyoe by Hiroshige
-  _overlayColor: {r: 1, g: 1, b: 1, a: 1}
+  _overlayColor: {r: 1, g: 0, b: 0, a: 0.54901963}
 --- !u!1 &1012035139
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
   _titleTexture: {fileID: 2800000, guid: 5a25b6e176fc44274b27c7d5d6417586, type: 3}
   _titleColor: {r: 1, g: 1, b: 1, a: 0}
   _overlayTexture: {fileID: 2800000, guid: 66d1ad67308d141899c01942f5fb63b4, type: 3}
-  _overlayColor: {r: 1, g: 0, b: 0, a: 0.39215687}
+  _overlayColor: {r: 1, g: 0, b: 0, a: 0.54901963}
   _lutTexture: {fileID: 8534537815417165676, guid: 244beb38c4aca46d38429ea743939884, type: 3}
   _flipDuration: 0.16
   _queueLength: 11
