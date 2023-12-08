@@ -60,9 +60,9 @@ public sealed class Configurator : MonoBehaviour
     {
         while (true)
         {
-            await Awaitable.WaitForSecondsAsync(Random.Range(10, 30));
+            await Awaitable.WaitForSecondsAsync(Random.Range(2, 5));
             var color = _overlayColor;
-            color.a *= Mathf.Clamp01(Random.Range(-3.0f, 1.0f));
+            color.a *= Mathf.Clamp01(Random.Range(-0.20f, 1.0f));
             _target.OverlayColor = color;
         }
     }
